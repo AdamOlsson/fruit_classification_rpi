@@ -15,17 +15,32 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    model_file = dir_path + "/saved_models/mobilenet/mobilenet_output_graph.pb"
-    label_file = dir_path + "/saved_models/mobilenet/mobilenet_output_labels.txt"
-    input_layer = "input"
-    output_layer = "final_result"
-    input_name = "import/" + input_layer
-    output_name = "import/" + output_layer
+
+    mobnet_model_file = dir_path + "/saved_models/mobilenet/mobilenet_output_graph.pb"
+    mobnet_label_file = dir_path + "/saved_models/mobilenet/mobilenet_output_labels.txt"
+    mobnet_input_layer = "input"
+    mobnet_output_layer = "final_result"
+    mobnet_input_name = "import/" + mobnet_input_layer
+    mobnet_output_name = "import/" + mobnet_output_layer
+    mobnet = Classifier(mobnet_model_file, mobnet_label_file, mobnet_input_name, mobnet_output_name, camera=args.camera)
+
+    incptn_model_file = dir_path + "/saved_models/inception/inception_output_graph.pb"
+    incptn_label_file = dir_path + "/saved_models/inception/inception_output_labels.txt"
+    incptn_input_layer = "Mul"
+    incptn_output_layer = "final_result"
+    incptn_input_name = "import/" + mobnet_input_layer
+    incptn_output_name = "import/" + mobnet_output_layer
+    incptn_input_mean=128
+    incptn_input_std=128
+    incptn = Classifier(model_file, label_file, input_name, output_name, camera=args.camera)
+
+
+    mobnet.start()
+
 
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
-            c = Classifier(model_file, label_file, input_name, output_name, camera=args.camera)
-            c.start()
+
 
             time.sleep(.1)
             try:
@@ -58,4 +73,4 @@ if __name__ == "__main__":
 
             except KeyboardInterrupt:
                 print "Exiting..."
-                c.stop()
+    mobnet.stop()
