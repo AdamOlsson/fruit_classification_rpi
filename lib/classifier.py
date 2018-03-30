@@ -14,11 +14,12 @@ import json
 
 class Classifier:
 
-    def __init__(self, graph_file, label_file, input_name, output_name):
+    def __init__(self, graph_file, label_file, input_name, output_name, camera=False):
         self.graph = self.load_graph(graph_file)
         self.labels = self.load_labels(label_file)
         self.input_operation = self.graph.get_operation_by_name(input_name)
         self.output_operation = self.graph.get_operation_by_name(output_name)
+        self.camera = camera
 
 
     def __enter__(self):
@@ -36,8 +37,10 @@ class Classifier:
         self.session.close()
 
     def label_image(self, image_path):
-        #t = self.read_tensor_from_image_file(image_path)
-        t = self.read_tensor_from_np_array(image_path)
+        if not self.camera:
+            t = self.read_tensor_from_image_file(image_path)
+        else:
+            t = self.read_tensor_from_np_array(image_path)
         results = self.session.run(self.output_operation.outputs[0], {self.input_operation.outputs[0]: t })
         results = np.squeeze(results)
 
@@ -74,7 +77,7 @@ class Classifier:
         result = sess.run(normalized)
 
         return result
-    
+
     def read_tensor_from_np_array(self, file_name, input_height=224, input_width=224, input_mean=128, input_std=128):
 
         float_caster = tf.convert_to_tensor(file_name, tf.float32)

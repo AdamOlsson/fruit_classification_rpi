@@ -3,11 +3,17 @@ import picamera.array
 import os
 import numpy as np
 import time
+import argparse
 from lib.classifier import Classifier
 from lib.restful import Restful
 
 
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('--camera', action='store_true', help='an integer for the accumulator')
+    args = parser.parse_args()
+
     dir_path = os.path.dirname(os.path.realpath(__file__))
     model_file = dir_path + "/saved_models/mobilenet/mobilenet_output_graph.pb"
     label_file = dir_path + "/saved_models/mobilenet/mobilenet_output_labels.txt"
@@ -18,7 +24,7 @@ if __name__ == "__main__":
 
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
-            c = Classifier(model_file, label_file, input_name, output_name, camera=True)
+            c = Classifier(model_file, label_file, input_name, output_name, camera=args.camera)
             c.start()
 
             time.sleep(.1)
