@@ -4,8 +4,7 @@ import os
 import numpy as np
 import time
 import argparse
-from lib.classifier import Classifier
-from lib.restful import Restful
+from classifier_eval import Classifier
 
 
 
@@ -16,27 +15,24 @@ if __name__ == "__main__":
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    mobnet_model_file = dir_path + "/saved_models/mobilenet/mobilenet_output_graph.pb"
-    mobnet_label_file = dir_path + "/saved_models/mobilenet/mobilenet_output_labels.txt"
+    mobnet_model_file = dir_path + "/../saved_models/mobilenet/mobilenet_output_graph.pb"
+    mobnet_label_file = dir_path + "/../saved_models/mobilenet/mobilenet_output_labels.txt"
     mobnet_input_layer = "input"
     mobnet_output_layer = "final_result"
     mobnet_input_name = "import/" + mobnet_input_layer
     mobnet_output_name = "import/" + mobnet_output_layer
-    mobnet = Classifier(mobnet_model_file, mobnet_label_file, mobnet_input_name, mobnet_output_name, camera=args.camera)
+    mobnet = Classifier(mobnet_model_file, mobnet_label_file, mobnet_input_name, mobnet_output_name, net="mobilenet")
 
-    incptn_model_file = dir_path + "/saved_models/inception/inception_output_graph.pb"
-    incptn_label_file = dir_path + "/saved_models/inception/inception_output_labels.txt"
+    incptn_model_file = dir_path + "/../saved_models/inception/inception_output_graph.pb"
+    incptn_label_file = dir_path + "/../saved_models/inception/inception_output_labels.txt"
     incptn_input_layer = "Mul"
     incptn_output_layer = "final_result"
-    incptn_input_name = "import/" + mobnet_input_layer
-    incptn_output_name = "import/" + mobnet_output_layer
-    incptn_input_mean=128
-    incptn_input_std=128
-    incptn = Classifier(model_file, label_file, input_name, output_name, camera=args.camera)
+    incptn_input_name = "import/" + incptn_input_layer
+    incptn_output_name = "import/" + incptn_output_layer
+    incptn = Classifier(incptn_model_file, incptn_label_file, incptn_input_name, incptn_output_name, net="inception")
 
-
+    incptn.start()
     mobnet.start()
-
 
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
@@ -74,3 +70,4 @@ if __name__ == "__main__":
             except KeyboardInterrupt:
                 print "Exiting..."
     mobnet.stop()
+    incptn.stop()
