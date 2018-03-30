@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
-            c = Classifier(model_file, label_file, input_name, output_name, camera=True)
+            c = Classifier(model_file, label_file, input_name, output_name, net="mobilenet")
             c.start()
 
             time.sleep(.1)

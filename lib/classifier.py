@@ -1,22 +1,15 @@
-import argparse
-
 import numpy as np
 import tensorflow as tf
 import os
-import time
-import requests
-import json
-
 
 class Classifier:
 
-    def __init__(self, graph_file, label_file, input_name, output_name, camera=False):
+    def __init__(self, graph_file, label_file, input_name, output_name, net="mobilenet"):
         self.graph = self.load_graph(graph_file)
         self.labels = self.load_labels(label_file)
         self.input_operation = self.graph.get_operation_by_name(input_name)
         self.output_operation = self.graph.get_operation_by_name(output_name)
-        self.camera = camera
-
+        self.net = net
 
     def __enter__(self):
         self.session = tf.Session(graph=self.graph)
@@ -33,8 +26,8 @@ class Classifier:
         self.session.close()
 
     def label_image(self, image_path):
-        if not self.camera:
-            t = self.read_tensor_from_image_file(image_path)
+        if self.net == "inception":
+            t = self.read_tensor_from_np_array(image_path, input_height=299, input_width=299, input_mean=0, input_std=255)
         else:
             t = self.read_tensor_from_np_array(image_path)
         results = self.session.run(self.output_operation.outputs[0], {self.input_operation.outputs[0]: t })

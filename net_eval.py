@@ -1,30 +1,26 @@
-import picamera
-import picamera.array
+#import picamera
+#import picamera.array
 import os
 import numpy as np
 import time
-import argparse
-from classifier_eval import Classifier
+from lib.classifier import Classifier
 
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('--camera', action='store_true', help='an integer for the accumulator')
-    args = parser.parse_args()
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    mobnet_model_file = dir_path + "/../saved_models/mobilenet/mobilenet_output_graph.pb"
-    mobnet_label_file = dir_path + "/../saved_models/mobilenet/mobilenet_output_labels.txt"
+    mobnet_model_file = dir_path + "/saved_models/mobilenet/mobilenet_output_graph.pb"
+    mobnet_label_file = dir_path + "/saved_models/mobilenet/mobilenet_output_labels.txt"
     mobnet_input_layer = "input"
     mobnet_output_layer = "final_result"
     mobnet_input_name = "import/" + mobnet_input_layer
     mobnet_output_name = "import/" + mobnet_output_layer
     mobnet = Classifier(mobnet_model_file, mobnet_label_file, mobnet_input_name, mobnet_output_name, net="mobilenet")
 
-    incptn_model_file = dir_path + "/../saved_models/inception/inception_output_graph.pb"
-    incptn_label_file = dir_path + "/../saved_models/inception/inception_output_labels.txt"
+    incptn_model_file = dir_path + "/saved_models/inception/inception_output_graph.pb"
+    incptn_label_file = dir_path + "/saved_models/inception/inception_output_labels.txt"
     incptn_input_layer = "Mul"
     incptn_output_layer = "final_result"
     incptn_input_name = "import/" + incptn_input_layer
@@ -33,10 +29,12 @@ if __name__ == "__main__":
 
     incptn.start()
     mobnet.start()
-
+    mobnet.stop()
+    incptn.stop()
+    exit()
+'''
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
-
 
             time.sleep(.1)
             try:
@@ -71,3 +69,4 @@ if __name__ == "__main__":
                 print "Exiting..."
     mobnet.stop()
     incptn.stop()
+'''
