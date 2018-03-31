@@ -29,7 +29,7 @@ class Classifier:
         if self.net == "inception":
             t = self.read_tensor_from_np_array(image_path, input_height=299, input_width=299, input_mean=0, input_std=255)
         else:
-            t = self.read_tensor_from_np_array(image_path)
+            t = self.read_tensor_from_np_array(image_path) # Use default mobilenet variables
         results = self.session.run(self.output_operation.outputs[0], {self.input_operation.outputs[0]: t })
         results = np.squeeze(results)
 

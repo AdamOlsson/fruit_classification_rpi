@@ -1,5 +1,5 @@
-#import picamera
-#import picamera.array
+import picamera
+import picamera.array
 import os
 import numpy as np
 import time
@@ -29,10 +29,7 @@ if __name__ == "__main__":
 
     incptn.start()
     mobnet.start()
-    mobnet.stop()
-    incptn.stop()
-    exit()
-'''
+
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
 
@@ -40,33 +37,41 @@ if __name__ == "__main__":
             try:
                 while(True):
                     camera.resolution = (640, 480)
-                    #TODO MAKE BUTTON HERE
-                    print "Press 'Enter' to capture an image."
-                    dummy = raw_input()
-
+                    # If the showing of camera doesn't work, check. Might be to advanced for the purpose
+                    # http://picamera.readthedocs.io/en/release-1.6/recipes2.html#capturing-images-whilst-recording
+                    camera.start_preview()
+                    #print "Press 'Enter' to capture an image."
+                    dummy = raw_input("Press 'Enter' to capture an image.")
+                    fruit = raw_input("Please enter the correct fruit:")
+                    camera.stop_preview()
                     print "Capturing..."
                     start = time.time()
                     camera.capture(output, 'rgb')
-                    print "Done! Labeling image..."
-                    checkpoint = time.time()
-                    results = c.label_image(output.array)
-                    end = time.time()
-                    print "Done! Posting..."
+                    output2 = np.copy(output.array)
+                    print "Done!"
+                    print "Labeling with Inception: Please wait..."
+                    cp_one = time.time()
+                    incptn_results = incptn.label_image(output.array)
+                    cp_two = time.time()
+                    print "Labeling with Inception: Done!"
+                    print "Labeling with Mobilenet: Please wait..."
+                    cp_three = time.time()
+                    mobnet_results = mobnet.label_image(output2)
+                    cp_four = time.time()
+                    print "Labeling with Mobilenet: Done!"
                     output.truncate(0)
-
-                    for res in results:
+                    incptn_prop_time = cp_two - cp_one
+                    mobnet_prop_time = cp_four - cp_three
+                    print "Results from Inception,", incptn_prop_time,"seconds. "
+                    for res in incptn_results:
                         print res
-                    print "{Capture", checkpoint-start, "seconds:::Labeling", end-checkpoint,"seconds}"
+                    print "Results from Mobilenet,", mobnet_prop_time,"seconds. "
 
-                    post_success = Restful.post("https://localhost:4001/results", results)
-
-                    if post_success:
-                        print "Successful POST"
-                    else:
-                        print "Failed POST"
+                    print "Writing to file..."
+                    with open("net_res.txt", "a+") as f:
+                        f.write("Inception: " + incptn_results + "::::: Mobilenet" + mobnet_results)
 
             except KeyboardInterrupt:
                 print "Exiting..."
     mobnet.stop()
     incptn.stop()
-'''
