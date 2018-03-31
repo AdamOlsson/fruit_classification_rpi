@@ -17,6 +17,7 @@ if __name__ == "__main__":
     mobnet_output_layer = "final_result"
     mobnet_input_name = "import/" + mobnet_input_layer
     mobnet_output_name = "import/" + mobnet_output_layer
+    print "Initializing Mobilenet..."
     mobnet = Classifier(mobnet_model_file, mobnet_label_file, mobnet_input_name, mobnet_output_name, net="mobilenet")
 
     incptn_model_file = dir_path + "/saved_models/inception/inception_output_graph.pb"
@@ -25,6 +26,7 @@ if __name__ == "__main__":
     incptn_output_layer = "final_result"
     incptn_input_name = "import/" + incptn_input_layer
     incptn_output_name = "import/" + incptn_output_layer
+    print "Initializing Inception..."
     incptn = Classifier(incptn_model_file, incptn_label_file, incptn_input_name, incptn_output_name, net="inception")
 
     incptn.start()
@@ -66,10 +68,11 @@ if __name__ == "__main__":
                     for res in incptn_results:
                         print res
                     print "Results from Mobilenet,", mobnet_prop_time,"seconds. "
-
+                    for res in mobnet_results:
+                        print res
                     print "Writing to file..."
                     with open("net_res.txt", "a+") as f:
-                        f.write("Inception: " + incptn_results + "::::: Mobilenet" + mobnet_results)
+                        f.write("Inception: " + str(incptn_results) + "::::: Mobilenet" + str(mobnet_results))
 
             except KeyboardInterrupt:
                 print "Exiting..."
