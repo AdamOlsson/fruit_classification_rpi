@@ -25,8 +25,11 @@ try:
 
             inception = inception.split(":", 1)[1] # Remove the 'inception:' part of the line
             mobilenet = mobilenet.split(":", 1)[1] # Remove the 'mobilenet:' part of the line
-            fruit = fruit.split("\n")[0] # Remove the '\n' at the end of string for pretty print purposes
 
+            inception, inception_prop_time = inception.split("time:") # extract propagation time
+            mobilenet, mobilenet_prop_time = mobilenet.split("time:")
+
+            fruit = fruit.split("\n")[0] # Remove the '\n' at the end of string for pretty print purposes
 
             inception = inception.replace("'", "\"") # " cannot be ' for to be read as json
             mobilenet = mobilenet.replace("'", "\"")
@@ -38,6 +41,8 @@ try:
             for item in range(len(inception_data)): # lengths are the same
                 print inception_data[item]["object"], inception_data[item]["accuracy"], "||", mobilenet_data[item]["object"], mobilenet_data[item]["accuracy"]
             
+            print "Inception: {} seconds || Mobilenet: {} seconds".format(inception_prop_time, mobilenet_prop_time)
+
             print "\n"
             line_num += 1
 

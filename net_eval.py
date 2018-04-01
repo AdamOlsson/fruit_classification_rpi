@@ -74,7 +74,7 @@ if __name__ == "__main__":
                     print "Writing to file..."
                     with open("eval_logs/" + log + ".txt", "a+") as f:
                         f.write("inception:" + str(incptn_results)  + "time:" + str(incptn_prop_time) + ":::::mobilenet:" + str(mobnet_results) + "time:" + str(mobnet_prop_time) + ":::::" + fruit + "\n")
-
+                    print ("Done!")
             except KeyboardInterrupt:
                 camera.stop_preview()
                 print "Exiting..."
