@@ -32,6 +32,8 @@ if __name__ == "__main__":
     incptn.start()
     mobnet.start()
 
+    log = raw_input("Enter filename for log (without '.txt'):")
+
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
 
@@ -40,10 +42,8 @@ if __name__ == "__main__":
             try:
                 while(True):
                     camera.resolution = resolution
-                    # If the showing of camera doesn't work, check. Might be to advanced for the purpose
-                    # http://picamera.readthedocs.io/en/release-1.6/recipes2.html#capturing-images-whilst-recording
                     camera.start_preview(fullscreen=False, window=(10,50, resolution[0], resolution[1]))
-                    #print "Press 'Enter' to capture an image."
+                    # TODO: Button press to initiate process
                     dummy = raw_input("Press 'Enter' to capture an image.")
                     fruit = raw_input("Please enter the correct fruit:")
                     camera.stop_preview()
@@ -72,7 +72,7 @@ if __name__ == "__main__":
                     for res in mobnet_results:
                         print res
                     print "Writing to file..."
-                    with open("net_res.txt", "a+") as f:
+                    with open(log + ".txt", "a+") as f:
                         f.write("Inception: " + str(incptn_results) + ":::::Mobilenet" + str(mobnet_results) + ":::::" + fruit + "\n")
 
             except KeyboardInterrupt:
