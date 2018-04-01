@@ -41,7 +41,7 @@ if __name__ == "__main__":
                     camera.resolution = (480, 320)
                     # If the showing of camera doesn't work, check. Might be to advanced for the purpose
                     # http://picamera.readthedocs.io/en/release-1.6/recipes2.html#capturing-images-whilst-recording
-                    camera.start_preview()
+                    camera.start_preview(fullscreen=False, window=(10,10, 480, 320))
                     #print "Press 'Enter' to capture an image."
                     dummy = raw_input("Press 'Enter' to capture an image.")
                     fruit = raw_input("Please enter the correct fruit:")
