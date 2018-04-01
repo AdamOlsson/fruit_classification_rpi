@@ -38,7 +38,7 @@ if __name__ == "__main__":
             time.sleep(.1)
             try:
                 while(True):
-                    camera.resolution = (640, 480)
+                    camera.resolution = (300, 300)
                     # If the showing of camera doesn't work, check. Might be to advanced for the purpose
                     # http://picamera.readthedocs.io/en/release-1.6/recipes2.html#capturing-images-whilst-recording
                     camera.start_preview()
