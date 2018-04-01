@@ -72,7 +72,7 @@ if __name__ == "__main__":
                         print res
                     print "Writing to file..."
                     with open("net_res.txt", "a+") as f:
-                        f.write("Inception: " + str(incptn_results) + "::::: Mobilenet" + str(mobnet_results))
+                        f.write("Inception: " + str(incptn_results) + ":::::Mobilenet" + str(mobnet_results) + ":::::" + fruit + "\n")
 
             except KeyboardInterrupt:
                 camera.stop_preview()
