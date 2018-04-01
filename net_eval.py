@@ -75,6 +75,7 @@ if __name__ == "__main__":
                         f.write("Inception: " + str(incptn_results) + "::::: Mobilenet" + str(mobnet_results))
 
             except KeyboardInterrupt:
+                camera.stop_preview()
                 print "Exiting..."
     mobnet.stop()
     incptn.stop()
