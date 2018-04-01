@@ -35,13 +35,14 @@ if __name__ == "__main__":
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
 
-            time.sleep(.1)
+            resolution = (720, 480)
+            time.sleep(.1) # Camera warm-up
             try:
                 while(True):
-                    camera.resolution = (480, 320)
+                    camera.resolution = resolution
                     # If the showing of camera doesn't work, check. Might be to advanced for the purpose
                     # http://picamera.readthedocs.io/en/release-1.6/recipes2.html#capturing-images-whilst-recording
-                    camera.start_preview(fullscreen=False, window=(10,10, 480, 320))
+                    camera.start_preview(fullscreen=False, window=(10,50, resolution[0], resolution[1]))
                     #print "Press 'Enter' to capture an image."
                     dummy = raw_input("Press 'Enter' to capture an image.")
                     fruit = raw_input("Please enter the correct fruit:")
