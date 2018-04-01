@@ -72,7 +72,7 @@ if __name__ == "__main__":
                     for res in mobnet_results:
                         print res
                     print "Writing to file..."
-                    with open(log + ".txt", "a+") as f:
+                    with open("eval_logs/" + log + ".txt", "a+") as f:
                         f.write("Inception: " + str(incptn_results) + ":::::Mobilenet" + str(mobnet_results) + ":::::" + fruit + "\n")
 
             except KeyboardInterrupt:
