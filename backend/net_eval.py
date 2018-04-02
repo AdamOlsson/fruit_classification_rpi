@@ -42,6 +42,7 @@ if __name__ == "__main__":
             try:
                 while(True):
                     camera.resolution = resolution
+                    camera.rotation = 180
                     camera.start_preview(fullscreen=False, window=(10,50, resolution[0], resolution[1]))
                     # TODO: Button press to initiate process
                     dummy = raw_input("Press 'Enter' to capture an image.")
