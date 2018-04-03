@@ -11,7 +11,7 @@ class Classifier:
         "kiwi": u"Kiwi",
         "potato": u"Potato",
         "bell pepper": u"Paprika",
-        "orange": u"Apelsin,
+        "orange": u"Apelsin",
         "clementine": u"Klementin",
         "tomato": u"Tomat",
         "avocado": u"Avokado",
@@ -50,7 +50,7 @@ class Classifier:
         top_k = results.argsort()[-5:][::-1]
         res_list = []
         for i in top_k:
-            res_list.append({"object": translations[self.labels[i]], "accuracy":str(results[i])})
+            res_list.append({"object": self.translations[self.labels[i]], "accuracy":str(results[i])})
         return res_list
 
 
