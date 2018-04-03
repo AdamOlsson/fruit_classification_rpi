@@ -1,3 +1,4 @@
+# coding=utf-8
 import picamera
 import picamera.array
 import os
