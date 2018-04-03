@@ -37,11 +37,11 @@ try:
             inception_data = json.loads(inception)
             mobilenet_data = json.loads(mobilenet)
 
-            print "Image {}. Inception LEFT || Mobilenet RIGHT ::::: Correct answer: {}".format(line_num, fruit)
+            print 'Image {:<3} {:>25} || {:<22} Correct answer: {}'.format(line_num, "Inception LEFT", "Mobilenet RIGHT", fruit)
             for item in range(len(inception_data)): # lengths are the same
-                print inception_data[item]["object"], inception_data[item]["accuracy"], "||", mobilenet_data[item]["object"], mobilenet_data[item]["accuracy"]
+                print '{}. {:<11} {:<20} ||         {}. {:<11} {:<30}'.format(item, inception_data[item]["object"], inception_data[item]["accuracy"], item, mobilenet_data[item]["object"], mobilenet_data[item]["accuracy"])
             
-            print "Inception: {} seconds || Mobilenet: {} seconds".format(inception_prop_time, mobilenet_prop_time)
+            print '{} {} {:<10} {:<10} {} {} {}'.format("Inception:", inception_prop_time, "seconds", "||","Mobilenet:", mobilenet_prop_time, "seconds")
 
             print "\n"
             line_num += 1
