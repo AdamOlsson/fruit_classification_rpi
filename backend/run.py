@@ -6,7 +6,7 @@ import numpy as np
 import time
 from lib.classifier import Classifier
 from lib.restful import Restful
-import socket
+from socketManager import SocketManager
 
 
 if __name__ == "__main__":
@@ -17,6 +17,11 @@ if __name__ == "__main__":
     output_layer = "final_result"
     input_name = "import/" + input_layer
     output_name = "import/" + output_layer
+
+    socket = SocketManager('127.0.0.1', 4001)
+    print 'Connecting to server at {}:{}'.format(socket.address, socket.port)
+    socket.open()
+    #print 'Connected!'
 
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
@@ -45,13 +50,16 @@ if __name__ == "__main__":
                         print res
                     print "{Capture", checkpoint-start, "seconds:::Labeling", end-checkpoint,"seconds}"
 
-                    post_success = Restful.post("https://localhost:4001/results", results)
+                    #post_success = Restful.post("https://localhost:4001/results", results)
 
-                    if post_success:
-                        print "Successful POST"
-                    else:
-                        print "Failed POST"
+                    socket.send(results)
+
+                    #if post_success:
+                    #    print "Successful POST"
+                    #else:
+                    #    print "Failed POST"
 
             except KeyboardInterrupt:
                 print "Exiting..."
                 c.stop()
+                socket.close()
