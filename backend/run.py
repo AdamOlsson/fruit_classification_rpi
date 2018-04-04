@@ -44,7 +44,7 @@ if __name__ == "__main__":
                         print res
                     print "{Capture", checkpoint-start, "seconds:::Labeling", end-checkpoint,"seconds}"
 
-                    post_success = Restful.post("https://localhost:4001/results", results)
+                    post_success = Restful.post("http://127.0.0.1:4001/results", results)
 
                     if post_success:
                         print "Successful POST"

@@ -11,8 +11,8 @@ if __name__ == "__main__":
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    mobnet_model_file = dir_path + "/saved_models/mobilenet/v2/mobilenet_output_graph.pb"
-    mobnet_label_file = dir_path + "/saved_models/mobilenet/v2/mobilenet_output_labels.txt"
+    mobnet_model_file = dir_path + "/saved_models/mobilenet/v3/mobilenet_output_graph.pb"
+    mobnet_label_file = dir_path + "/saved_models/mobilenet/v3/mobilenet_output_labels.txt"
     mobnet_input_layer = "input"
     mobnet_output_layer = "final_result"
     mobnet_input_name = "import/" + mobnet_input_layer
@@ -20,8 +20,8 @@ if __name__ == "__main__":
     print "Initializing Mobilenet..."
     mobnet = Classifier(mobnet_model_file, mobnet_label_file, mobnet_input_name, mobnet_output_name, net="mobilenet")
 
-    incptn_model_file = dir_path + "/saved_models/inception/v2/inception_output_graph.pb"
-    incptn_label_file = dir_path + "/saved_models/inception/v2/inception_output_labels.txt"
+    incptn_model_file = dir_path + "/saved_models/inception/v3/inception_output_graph.pb"
+    incptn_label_file = dir_path + "/saved_models/inception/v3/inception_output_labels.txt"
     incptn_input_layer = "Mul"
     incptn_output_layer = "final_result"
     incptn_input_name = "import/" + incptn_input_layer
@@ -75,9 +75,9 @@ if __name__ == "__main__":
                     print "Writing to file..."
                     with open("eval_logs/" + log + ".txt", "a+") as f:
                         f.write("inception:" + str(incptn_results)  + "time:" + str(incptn_prop_time) + ":::::mobilenet:" + str(mobnet_results) + "time:" + str(mobnet_prop_time) + ":::::" + fruit + "\n")
-                    print ("Done!")
+		            print ("Done!")
             except KeyboardInterrupt:
                 camera.stop_preview()
                 print "Exiting..."
-    mobnet.stop()
+    #mobnet.stop()
     incptn.stop()
