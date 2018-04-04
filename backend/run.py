@@ -6,6 +6,7 @@ import numpy as np
 import time
 from lib.classifier import Classifier
 from lib.restful import Restful
+import socket
 
 
 if __name__ == "__main__":
