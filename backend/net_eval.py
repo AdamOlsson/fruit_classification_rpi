@@ -18,7 +18,7 @@ if __name__ == "__main__":
     mobnet_input_name = "import/" + mobnet_input_layer
     mobnet_output_name = "import/" + mobnet_output_layer
     print "Initializing Mobilenet..."
-    #mobnet = Classifier(mobnet_model_file, mobnet_label_file, mobnet_input_name, mobnet_output_name, net="mobilenet")
+    mobnet = Classifier(mobnet_model_file, mobnet_label_file, mobnet_input_name, mobnet_output_name, net="mobilenet")
 
     incptn_model_file = dir_path + "/saved_models/inception/v2/inception_output_graph.pb"
     incptn_label_file = dir_path + "/saved_models/inception/v2/inception_output_labels.txt"
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     incptn = Classifier(incptn_model_file, incptn_label_file, incptn_input_name, incptn_output_name, net="inception")
 
     incptn.start()
-    #mobnet.start()
+    mobnet.start()
 
     log = raw_input("Enter filename for log (without '.txt'):")
 
@@ -46,7 +46,7 @@ if __name__ == "__main__":
                     camera.start_preview(fullscreen=False, window=(10,50, resolution[0], resolution[1]))
                     # TODO: Button press to initiate process
                     dummy = raw_input("Press 'Enter' to capture an image.")
-                    #fruit = raw_input("Please enter the correct fruit:")
+                    fruit = raw_input("Please enter the correct fruit:")
                     camera.stop_preview()
                     print "Capturing..."
                     start = time.time()
@@ -58,25 +58,24 @@ if __name__ == "__main__":
                     incptn_results = incptn.label_image(output.array)
                     cp_two = time.time()
                     print "Labeling with Inception: Done!"
-                    #print "Labeling with Mobilenet: Please wait..."
+                    print "Labeling with Mobilenet: Please wait..."
                     cp_three = time.time()
-                    #mobnet_results = mobnet.label_image(output2)
+                    mobnet_results = mobnet.label_image(output2)
                     cp_four = time.time()
-                    #print "Labeling with Mobilenet: Done!"
+                    print "Labeling with Mobilenet: Done!"
                     output.truncate(0)
                     incptn_prop_time = cp_two - cp_one
-                    #mobnet_prop_time = cp_four - cp_three
+                    mobnet_prop_time = cp_four - cp_three
                     print "Results from Inception,", incptn_prop_time,"seconds. "
                     for res in incptn_results:
                         print res
                     print "Results from Mobilenet,", mobnet_prop_time,"seconds. "
-                    #for res in mobnet_results:
-                    #    print res
+                    for res in mobnet_results:
+                        print res
                     print "Writing to file..."
                     with open("eval_logs/" + log + ".txt", "a+") as f:
-                        #f.write("inception:" + str(incptn_results)  + "time:" + str(incptn_prop_time) + ":::::mobilenet:" + str(mobnet_results) + "time:" + str(mobnet_prop_time) + ":::::" + fruit + "\n")
-                	    f.write("inception:" + str(incptn_results)  + "time:" + str(incptn_prop_time) + ":::::mobilenet:" + " " + "time:" + " " + ":::::" + fruit + "\n")    
-		    print ("Done!")
+                        f.write("inception:" + str(incptn_results)  + "time:" + str(incptn_prop_time) + ":::::mobilenet:" + str(mobnet_results) + "time:" + str(mobnet_prop_time) + ":::::" + fruit + "\n")
+		            print ("Done!")
             except KeyboardInterrupt:
                 camera.stop_preview()
                 print "Exiting..."
