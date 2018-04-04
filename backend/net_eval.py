@@ -69,7 +69,6 @@ if __name__ == "__main__":
                     print "Results from Inception,", incptn_prop_time,"seconds. "
                     for res in incptn_results:
                         print res
-<<<<<<< HEAD
                     print "Results from Mobilenet,", mobnet_prop_time,"seconds. "
                     for res in mobnet_results:
                         print res
@@ -77,16 +76,6 @@ if __name__ == "__main__":
                     with open("eval_logs/" + log + ".txt", "a+") as f:
                         f.write("inception:" + str(incptn_results)  + "time:" + str(incptn_prop_time) + ":::::mobilenet:" + str(mobnet_results) + "time:" + str(mobnet_prop_time) + ":::::" + fruit + "\n")
 		            print ("Done!")
-=======
-                    #print "Results from Mobilenet,", mobnet_prop_time,"seconds. "
-                    #for res in mobnet_results:
-                    #    print res
-                    print "Writing to file..."
-                    with open("eval_logs/" + log + ".txt", "a+") as f:
-                        #f.write("inception:" + str(incptn_results)  + "time:" + str(incptn_prop_time) + ":::::mobilenet:" + str(mobnet_results) + "time:" + str(mobnet_prop_time) + ":::::" + fruit + "\n")
-                	    f.write("inception:" + str(incptn_results)  + "time:" + str(incptn_prop_time) + ":::::mobilenet:" + " " + "time:" + " " + ":::::" + " " + "\n")    
-		    print ("Done!")
->>>>>>> 089d94868896235267bc035bd3809e9f20da8b23
             except KeyboardInterrupt:
                 camera.stop_preview()
                 print "Exiting..."
