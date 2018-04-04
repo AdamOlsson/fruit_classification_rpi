@@ -37,7 +37,7 @@ if __name__ == "__main__":
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
 
-            resolution = (720, 480)
+            resolution = (360, 240)
             time.sleep(.1) # Camera warm-up
             try:
                 while(True):
