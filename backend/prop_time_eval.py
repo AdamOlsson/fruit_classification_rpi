@@ -81,6 +81,7 @@ if __name__ == "__main__":
                     mem_session = process.memory_info()[0]
                     print 'Propagation time was {} seconds'.format(prop_time)
                     print 'Size of this session is {} bytes'.format(mem_session)
+                    print 'Size of this output is {} bytes'.format(sys.getsizeof(output))
                     print "Writing to file..."
 
                     with open("eval_logs/" + log + ".txt", "a+") as f:
