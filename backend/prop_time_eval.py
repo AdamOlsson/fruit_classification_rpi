@@ -6,11 +6,12 @@ import time
 from lib.classifier import Classifier
 import argparse
 import sys
-
+import psutil
 
 
 if __name__ == "__main__":
 
+    process = psutil.Process(os.getpid())
     log = raw_input("Enter filename for log (without '.txt'):")
     n = 100
 
@@ -66,7 +67,7 @@ if __name__ == "__main__":
                     camera.resolution = resolution
                     camera.rotation = 180
                     time.sleep(.2)
-                    print "Capturing..."
+                    print 'Capturing image {} of {}...'.format(iteration, n)
                     start = time.time()
                     camera.capture(output, 'rgb')
                     print "Done!"
@@ -78,7 +79,7 @@ if __name__ == "__main__":
                     output.truncate(0)
                     prop_time = cp_two - cp_one
                     print 'Propagation time was {} seconds'.format(prop_time)
-                    print 'Size of session net session is {} bytes'.format(sys.getsizeof(net))
+                    print 'Size of this session is {} bytes'.format(process.memory_info()[0])
                     print "Writing to file..."
 
                     with open("eval_logs/" + log + ".txt", "a+") as f:
