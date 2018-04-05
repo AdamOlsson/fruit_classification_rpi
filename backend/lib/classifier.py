@@ -46,8 +46,8 @@ class Classifier:
         self.session.close()
 
     def label_image(self, image_path):
-        t = tf.Session(self.read_tensor_from_np_array_op, feed_dict={"file_name:0" image_path})
-        
+        t = tf.Session(self.read_tensor_from_np_array_op, feed_dict={"file_name:0":image_path})
+
         results = self.session.run(self.output_operation.outputs[0], {self.input_operation.outputs[0]: t })
         results = np.squeeze(results)
 
