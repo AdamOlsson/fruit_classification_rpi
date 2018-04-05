@@ -25,6 +25,12 @@ class Classifier:
         self.output_operation = self.graph.get_operation_by_name(output_name)
         self.net = net
 
+        if net == "inception":
+            self.read_tensor_from_np_array_op = self.create_read_tensor_from_np_array(input_height=299, input_width=299, input_mean=0, input_std=255)
+        else:
+            self.read_tensor_from_np_array_op = self.create_read_tensor_from_np_array() # Use default mobilenet variables
+
+
     def __enter__(self):
         self.session = tf.Session(graph=self.graph)
         return self.session
@@ -40,10 +46,8 @@ class Classifier:
         self.session.close()
 
     def label_image(self, image_path):
-        if self.net == "inception":
-            t = self.read_tensor_from_np_array(image_path, input_height=299, input_width=299, input_mean=0, input_std=255)
-        else:
-            t = self.read_tensor_from_np_array(image_path) # Use default mobilenet variables
+        t = tf.Session(self.read_tensor_from_np_array_op, feed_dict={"file_name:0" image_path})
+        
         results = self.session.run(self.output_operation.outputs[0], {self.input_operation.outputs[0]: t })
         results = np.squeeze(results)
 
@@ -83,14 +87,25 @@ class Classifier:
 
     def read_tensor_from_np_array(self, file_name, input_height=224, input_width=224, input_mean=128, input_std=128):
 
-        self.float_caster = tf.convert_to_tensor(file_name, tf.float32)
-        self.dims_expander = tf.expand_dims(self.float_caster, 0)
-        self.resized = tf.image.resize_bilinear(self.dims_expander, [input_height, input_width])
-        self.normalized = tf.divide(tf.subtract(self.resized, [input_mean]), [input_std])
-        self.sess = tf.Session() #dis
-        self.result = self.sess.run(self.normalized)
+        float_caster = tf.convert_to_tensor(file_name, tf.float32)
+        dims_expander = tf.expand_dims(float_caster, 0)
+        resized = tf.image.resize_bilinear(dims_expander, [input_height, input_width])
+        normalized = tf.divide(tf.subtract(resized, [input_mean]), [input_std])
+        sess = tf.Session() #dis
+        result = sess.run(normalized)
 
-        return self.result
+        return result
+
+    def create_read_tensor_from_np_array(self, input_height=224, input_width=224, input_mean=128, input_std=128):
+
+        file_name = tf.placeholder("string", name="file_name")
+
+        float_caster = tf.convert_to_tensor(file_name, tf.float32)
+        dims_expander = tf.expand_dims(float_caster, 0)
+        resized = tf.image.resize_bilinear(dims_expander, [input_height, input_width])
+        normalized = tf.divide(tf.subtract(resized, [input_mean]), [input_std])
+
+        return normalized
 
 
     def load_labels(self, label_file):
