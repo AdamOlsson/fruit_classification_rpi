@@ -33,20 +33,24 @@ class Classifier:
 
     def __enter__(self):
         self.session = tf.Session(graph=self.graph)
+        self.norm_session = tf.Session()
         return self.session
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.session.close()
+        self.norm_session.close()
         return True
 
     def start(self):
         self.session = tf.Session(graph=self.graph)
+        self.norm_session = tf.Session()
 
     def stop(self):
         self.session.close()
+        self.norm_session.close()
 
     def label_image(self, image):
-        t = tf.Session(self.read_tensor_from_np_array_op, feed_dict={"image_array:0":image})
+        t = self.norm_session.run(self.read_tensor_from_np_array_op, feed_dict={"image_array:0":image})
 
         results = self.session.run(self.output_operation.outputs[0], {self.input_operation.outputs[0]: t })
         results = np.squeeze(results)
