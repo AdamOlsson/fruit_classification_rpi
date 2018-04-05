@@ -20,7 +20,7 @@ if __name__ == "__main__":
     parser.add_argument('-itr', dest='itr', type=int, help='Number of images to propagate')
     args = parser.parse_args()
 
-    if (args.mobilenet and args.incpetion) or (not args.mobilenet and not args.incpetion):
+    if (args.mobilenet and args.inception) or (not args.mobilenet and not args.inception):
         print "Please provide one network to test."
         exit(1)
     
