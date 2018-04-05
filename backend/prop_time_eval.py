@@ -17,7 +17,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--mobilnet', action='store_true', help='Use mobilenet in test')
     parser.add_argument('--inception', action='store_true', help='Use inception in test')
-    parser.add_argument('-itr', dest='itr', type=int help='Number of images to propagate')
+    parser.add_argument('-itr', dest='itr', type=int, help='Number of images to propagate')
     args = parser.parse_args()
 
     if (args.mobilenet and args.incpetion) or (not args.mobilenet and not args.incpetion):
