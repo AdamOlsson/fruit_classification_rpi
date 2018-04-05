@@ -5,6 +5,7 @@ import numpy as np
 import time
 from lib.classifier import Classifier
 import argparse
+import sys
 
 
 
@@ -77,6 +78,7 @@ if __name__ == "__main__":
                     output.truncate(0)
                     prop_time = cp_two - cp_one
                     print 'Propagation time was {} seconds'.format(prop_time)
+                    print 'Size of session net session is {} bytes'.format(sys.getsizeof(net))
                     print "Writing to file..."
 
                     with open("eval_logs/" + log + ".txt", "a+") as f:
