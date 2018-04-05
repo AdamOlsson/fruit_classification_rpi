@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mobilnet', action='store_true', help='Use mobilenet in test')
+    parser.add_argument('--mobilenet', action='store_true', help='Use mobilenet in test')
     parser.add_argument('--inception', action='store_true', help='Use inception in test')
     parser.add_argument('-itr', dest='itr', type=int, help='Number of images to propagate')
     args = parser.parse_args()
