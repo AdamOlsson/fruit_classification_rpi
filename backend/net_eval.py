@@ -29,8 +29,14 @@ if __name__ == "__main__":
     print "Initializing Inception..."
     incptn = Classifier(incptn_model_file, incptn_label_file, incptn_input_name, incptn_output_name, net="inception")
 
+    test1 = time.time()
     incptn.start()
+    test2 = time.time()
     mobnet.start()
+    test3 = time.time()
+
+    print 'Inception start took {} seconds'.format(test2-test1)
+    print 'MobileNet start took {} seconds'.format(test3-test2)
 
     log = raw_input("Enter filename for log (without '.txt'):")
 
