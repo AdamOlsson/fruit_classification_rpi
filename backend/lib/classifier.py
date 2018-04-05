@@ -25,6 +25,7 @@ class Classifier:
         self.output_operation = self.graph.get_operation_by_name(output_name)
         self.net = net
 
+        # Will cause mem leak if not defined outside of run.py while loop
         if net == "inception":
             self.read_tensor_from_np_array_op = self.create_read_tensor_from_np_array(input_height=299, input_width=299, input_mean=0, input_std=255)
         else:
