@@ -86,5 +86,5 @@ if __name__ == "__main__":
             except KeyboardInterrupt:
                 camera.stop_preview()
                 print "Exiting..."
-    #mobnet.stop()
+    mobnet.stop()
     incptn.stop()
