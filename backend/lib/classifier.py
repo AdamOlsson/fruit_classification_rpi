@@ -83,14 +83,14 @@ class Classifier:
 
     def read_tensor_from_np_array(self, file_name, input_height=224, input_width=224, input_mean=128, input_std=128):
 
-        float_caster = tf.convert_to_tensor(file_name, tf.float32)
-        dims_expander = tf.expand_dims(float_caster, 0)
-        resized = tf.image.resize_bilinear(dims_expander, [input_height, input_width])
-        normalized = tf.divide(tf.subtract(resized, [input_mean]), [input_std])
+        self.float_caster = tf.convert_to_tensor(file_name, tf.float32)
+        self.dims_expander = tf.expand_dims(self.float_caster, 0)
+        self.resized = tf.image.resize_bilinear(self.dims_expander, [input_height, input_width])
+        self.normalized = tf.divide(tf.subtract(self.resized, [input_mean]), [input_std])
         self.sess = tf.Session() #dis
-        result = self.sess.run(normalized)
+        self.result = self.sess.run(self.normalized)
 
-        return result
+        return self.result
 
 
     def load_labels(self, label_file):
