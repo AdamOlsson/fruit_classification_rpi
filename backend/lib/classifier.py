@@ -45,8 +45,8 @@ class Classifier:
     def stop(self):
         self.session.close()
 
-    def label_image(self, image_path):
-        t = tf.Session(self.read_tensor_from_np_array_op, feed_dict={"file_name:0":image_path})
+    def label_image(self, image):
+        t = tf.Session(self.read_tensor_from_np_array_op, feed_dict={"image_array:0":image})
 
         results = self.session.run(self.output_operation.outputs[0], {self.input_operation.outputs[0]: t })
         results = np.squeeze(results)
@@ -98,7 +98,7 @@ class Classifier:
 
     def create_read_tensor_from_np_array(self, input_height=224, input_width=224, input_mean=128, input_std=128):
 
-        file_name = tf.placeholder("string", name="file_name")
+        file_name = tf.placeholder("float", name="image_array")
 
         float_caster = tf.convert_to_tensor(file_name, tf.float32)
         dims_expander = tf.expand_dims(float_caster, 0)
