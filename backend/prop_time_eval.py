@@ -78,12 +78,15 @@ if __name__ == "__main__":
                     print "Labeling with Inception: Done!"
                     output.truncate(0)
                     prop_time = cp_two - cp_one
+                    mem_session = process.memory_info()[0]
                     print 'Propagation time was {} seconds'.format(prop_time)
-                    print 'Size of this session is {} bytes'.format(process.memory_info()[0])
+                    print 'Size of this session is {} bytes'.format(mem_session)
                     print "Writing to file..."
 
                     with open("eval_logs/" + log + ".txt", "a+") as f:
                         f.write(str(prop_time) + "\n")
+                    with open("eval_logs/" + log + "bytes.txt", "a+") as f:
+                        f.write(str(mem_session) + "\n")
 
                     print "Done!"
             except KeyboardInterrupt:
