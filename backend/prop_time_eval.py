@@ -80,7 +80,7 @@ if __name__ == "__main__":
                     print "Writing to file..."
 
                     with open("eval_logs/" + log + ".txt", "a+") as f:
-                        f.write(prop_time) + "\n")
+                        f.write(prop_time + "\n")
 
                     print "Done!"
             except KeyboardInterrupt:
