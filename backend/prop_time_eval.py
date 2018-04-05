@@ -64,6 +64,7 @@ if __name__ == "__main__":
             time.sleep(.1) # Camera warm-up
             try:
                 for iteration in range(n):
+                    net.start()
                     camera.resolution = resolution
                     camera.rotation = 180
                     time.sleep(.2)
@@ -81,9 +82,10 @@ if __name__ == "__main__":
                     mem_session = process.memory_info()[0]
                     print 'Propagation time was {} seconds'.format(prop_time)
                     print 'Size of this session is {} bytes'.format(mem_session)
-                    print 'TF Session is {} bytes'.format(sys.getsizeof(net.session))
+                    #print 'TF Session is {} bytes'.format(sys.getsizeof(net.session))
                     print "Writing to file..."
 
+                    net.stop()
                     with open("eval_logs/" + log + ".txt", "a+") as f:
                         f.write(str(prop_time) + "\n")
                     with open("eval_logs/" + log + "bytes.txt", "a+") as f:
