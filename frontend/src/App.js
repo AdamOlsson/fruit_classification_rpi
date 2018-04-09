@@ -38,12 +38,6 @@ class App extends Component {
         });
     }
 
-
-    /*loadData () {
-        this.setState({ outputChange: data.output });
-        return data.output;
-    }*/
-
     goFull = () => {
         this.setState({ isFull: true });
     }

@@ -47,12 +47,7 @@ class SearchField extends React.Component {
 
 
     render () {
-        /*
-        Två arrayer:
-        this.props.results innehåller strängar (namn på frukt),
-        this.state.products innehåller objekt som innehåller namn på frukter/grönsaker
-        Jag vill göra något såhär:
-      */
+
         let filteredProducts = this.state.products.filter(
             (product) => {
                 return product.props.name.toLowerCase().indexOf(
@@ -72,8 +67,7 @@ class SearchField extends React.Component {
                         </label>
                     </form>
                 </div>
-
-                <div style={{ marginBottom: '50px' }}> {filteredProducts.map((product) => {
+                <div style={{ marginBottom: '100px' }}> {filteredProducts.map((product) => {
                     return (<ProductItem
                         name = {product.props.name}
                         price={product.props.price}

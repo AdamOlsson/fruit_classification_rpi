@@ -5,9 +5,11 @@
   height: 100%;
   position: absolute;
   background-image: url("https://images.pexels.com/photos/952353/pexels-photo-952353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-
+  background-size: 100%
 
 }
+
+selector { cursor: none; }
 
 .App span{
   font-size: 28px;
@@ -73,10 +75,15 @@
   font-size: 24px;
 }
 
+.product-list{
+    margin-bottom: 140px;
+}
+
 .list-container{
   width: 220px;
   height: 220px;
   padding: 10px;
+  margin-bottom: 80px;
 }
 
 .product-item{
