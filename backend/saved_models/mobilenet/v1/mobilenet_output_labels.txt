@@ -1,0 +1,10 @@
+apple
+pear
+banana
+potato
+tomato
+clementine
+bell pepper
+kiwi
+orange
+avocado
