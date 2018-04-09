@@ -35,6 +35,7 @@ class ProductItem extends React.Component {
 }
 
 ProductItem.propTypes = {
+    label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     image: PropTypes.string,
     price: PropTypes.string.isRequired

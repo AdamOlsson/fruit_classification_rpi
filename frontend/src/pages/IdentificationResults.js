@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import ProductItem from '../components/ProductItem';
 import SearchField from '../components/SearchField';
 import history from '../history';
+import Strings from '../Strings.json';
 
-
+import potato from '../Images/potato.jpg';
 import banana from '../Images/banana.jpg';
 import orange from '../Images/orange.jpg';
 import clementine from '../Images/clementine.jpg';
@@ -23,23 +24,19 @@ class IdentificationResults extends React.Component {
         super(props);
         this.state = {
             identifiedProducts: this.props.results,
-            fruit: '',
             results: '',
-            value: this.props.results[0],
-            response: false,
-            endpoint: "http://127.0.0.1:4001", // Address to API
-            data: '', //här ska data från Adam in
             products: [
-                <ProductItem name="Banan" image={banana} price = "10 kr/kg" />,
-                <ProductItem name="Apelsin" image={orange} price = "20 kr/kg" />,
-                <ProductItem name="Kiwi" image={kiwi} price = "30 kr/kg" />,
-                <ProductItem name="Clementin" image={clementine} price = "40 kr/kg" />,
-                <ProductItem name="Morot" image={carrot} price = "60 kr/kg" />,
-                <ProductItem name="Päron" image={pear} price = "60 kr/kg" />,
-                <ProductItem name="Tomat" image={tomato} price = "60 kr/kg" />,
-                <ProductItem name="Avocado" image={avocado} price = "60 kr/kg" />,
-                <ProductItem name="Paprika" image={bellpepper} price = "60 kr/kg" />,
-                <ProductItem name="Äpple" image={apple} price = "60 kr/kg" />
+              <ProductItem label = {Strings.banana} name="banana" image={banana} price = "25 kr/kg" />,
+              <ProductItem label = {Strings.orange} name="orange" image={orange} price = "23 kr/kg" />,
+              <ProductItem label = {Strings.kiwi} name="kiwi" image={kiwi} price = "55 kr/kg" />,
+              <ProductItem label = {Strings.clementine} name="clementine" image={clementine} price = "39 kr/kg" />,
+              <ProductItem label = {Strings.potato} name="potato" image={potato} price = "12 kr/kg" />,
+              <ProductItem label = {Strings.pear} name="pear" image={pear} price = "29 kr/kg" />,
+              <ProductItem label = {Strings.tomato} name="tomato" image={tomato} price = "45 kr/kg" />,
+              <ProductItem label = {Strings.avocado} name="avocado" image={avocado} price = "85 kr/kg" />,
+              <ProductItem label = {Strings.bellpepper} name="bellpepper" image={bellpepper} price = "59 kr/kg" />,
+              <ProductItem label = {Strings.apple} name="apple" image={apple} price = "35 kr/kg" />
+
             ]
         };
     }
@@ -79,11 +76,11 @@ class IdentificationResults extends React.Component {
                     <div className="panel" style={{ flex: 1 }} >
                         <span> Välj önskad vara </span>
                     </div>
-                    <div style={{ justifyContent: 'center', alignItems: 'center', marginBottom: '50px' }}>
+                    <div style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <div>
                             {filteredProducts.map((product) => {
                                 return (<ProductItem
-                                    name = {product.props.name}
+                                    label = {product.props.label}
                                     price={product.props.price}
                                     image = {product.props.image} />);
                             })}
@@ -95,7 +92,7 @@ class IdentificationResults extends React.Component {
                     <span> Tyvärr kunde vi inte identifiera varan. Vänligen sök.</span>}
                     </div>
 
-                    <div style={{ flex: 1, marginTop: '100px', flexDirection: 'row' }} className = "info-text" >
+                    <div style={{ flex: 1, flexDirection: 'row' }} className = "info-text" >
                         <div>Hittades inte din vara?</div>
                         <div><button className="link-button" onClick={this.redirectToHome}>
                           Sök vara

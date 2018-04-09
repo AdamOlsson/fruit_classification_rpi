@@ -45,14 +45,13 @@ class App extends Component {
     sendProperties (data) {
         var tempArray = [];
 
-        this.setState({ passedData: data.results[0].object });
         data.results.map(function (prod) {
             if (prod.accuracy >= 0.1) {
                 tempArray.push(prod.object);
             }
         });
         this.setState({ bestResults: tempArray });
-        console.log(this.state.bestResults);
+
     }
 
 
@@ -103,7 +102,6 @@ class App extends Component {
                                     <Route exact path="/" component = {Home} />
                                     <Route path="/identification"
                                         component = {Identification}
-                                        state = {this.passedData}
                                     />
                                     <Route path="/home" component = {Home} />
                                     <Route path="/printing" component = {Printing} />
