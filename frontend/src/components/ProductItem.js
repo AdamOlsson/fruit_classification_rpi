@@ -25,7 +25,7 @@ class ProductItem extends React.Component {
                     onClick={this.printLabel}>
                     <img src = {this.props.image} style ={{ opacity: '0.9', width: '80%' }} alt =""/>
                     <div style={{ display: 'inline-block' }}>
-                        {this.props.name + ' '}
+                        {this.props.label + ' '}
                         {this.props.price}
                     </div>
                 </div>

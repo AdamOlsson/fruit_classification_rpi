@@ -1,5 +1,7 @@
 import React from 'react';
 import '../App.css';
+import Strings from '../Strings.json';
+
 
 import ProductItem from '../components/ProductItem';
 import 'react-notifications/lib/notifications.css';
@@ -8,7 +10,7 @@ import banana from '../Images/banana.jpg';
 import orange from '../Images/orange.jpg';
 import clementine from '../Images/clementine.jpg';
 import kiwi from '../Images/kiwi.jpg';
-import carrot from '../Images/carrot.jpg';
+import potato from '../Images/potato.jpg';
 import pear from '../Images/pear.jpg';
 import avocado from '../Images/avocado.jpg';
 import tomato from '../Images/tomato.jpg';
@@ -23,16 +25,16 @@ class SearchField extends React.Component {
             value: '',
             currentlyDisplayed: this.props.products,
             products: [
-                <ProductItem name="Banan" image={banana} price = "10 kr/kg" />,
-                <ProductItem name="Apelsin" image={orange} price = "20 kr/kg" />,
-                <ProductItem name="Kiwi" image={kiwi} price = "30 kr/kg" />,
-                <ProductItem name="Clementin" image={clementine} price = "40 kr/kg" />,
-                <ProductItem name="Morot" image={carrot} price = "60 kr/kg" />,
-                <ProductItem name="Päron" image={pear} price = "60 kr/kg" />,
-                <ProductItem name="Tomat" image={tomato} price = "60 kr/kg" />,
-                <ProductItem name="Avocado" image={avocado} price = "60 kr/kg" />,
-                <ProductItem name="Paprika" image={bellpepper} price = "60 kr/kg" />,
-                <ProductItem name="Äpple" image={apple} price = "60 kr/kg" />
+                <ProductItem label = {Strings.banana} name="banana" image={banana} price = "25 kr/kg" />,
+                <ProductItem label = {Strings.orange} name="orange" image={orange} price = "23 kr/kg" />,
+                <ProductItem label = {Strings.kiwi} name="kiwi" image={kiwi} price = "55 kr/kg" />,
+                <ProductItem label = {Strings.clementine} name="clementine" image={clementine} price = "39 kr/kg" />,
+                <ProductItem label = {Strings.potato} name="potato" image={potato} price = "12 kr/kg" />,
+                <ProductItem label = {Strings.pear} name="pear" image={pear} price = "29 kr/kg" />,
+                <ProductItem label = {Strings.tomato} name="tomato" image={tomato} price = "45 kr/kg" />,
+                <ProductItem label = {Strings.avocado} name="avocado" image={avocado} price = "85 kr/kg" />,
+                <ProductItem label = {Strings.bellpepper} name="bellpepper" image={bellpepper} price = "59 kr/kg" />,
+                <ProductItem label = {Strings.apple} name="apple" image={apple} price = "35 kr/kg" />
 
             ]
         };
@@ -69,6 +71,7 @@ class SearchField extends React.Component {
                 </div>
                 <div style={{ marginBottom: '100px' }}> {filteredProducts.map((product) => {
                     return (<ProductItem
+                        label = {product.props.label}
                         name = {product.props.name}
                         price={product.props.price}
                         image = {product.props.image} />);
