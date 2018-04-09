@@ -4,7 +4,7 @@ apple
 banana
 tomato
 orange
-bell pepper
+bellpepper
 pear
 avocado
 kiwi

@@ -1,6 +1,8 @@
+# coding=utf-8
 import argparse
 import os
 import json
+from unidecode import unidecode
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--log', dest='log', help='Log file to process')
@@ -29,11 +31,12 @@ try:
             inception, inception_prop_time = inception.split("time:") # extract propagation time
             mobilenet, mobilenet_prop_time = mobilenet.split("time:")
 
-            fruit = fruit.split("\n")[0] # Remove the '\n' at the end of string for pretty print purposes
+            #fruit = fruit.split("\n")[0] # Remove the '\n' at the end of string for pretty print purposes
 
             inception = inception.replace("'", "\"") # " cannot be ' for to be read as json
-            mobilenet = mobilenet.replace("'", "\"")
+            mobilenet = mobilenet.replace("'", "\"")            
 
+            print inception
             inception_data = json.loads(inception)
             mobilenet_data = json.loads(mobilenet)
 

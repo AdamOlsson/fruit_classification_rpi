@@ -1,7 +1,7 @@
 clementine
 kiwi
 tomato
-bell pepper
+bellpepper
 orange
 potato
 pear

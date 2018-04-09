@@ -5,19 +5,6 @@ import os
 
 class Classifier:
 
-    translations = {
-        "apple": u"Äpple",
-        "banana" : u"Banan",
-        "kiwi": u"Kiwi",
-        "potato": u"Potato",
-        "bell pepper": u"Paprika",
-        "orange": u"Apelsin",
-        "clementine": u"Klementin",
-        "tomato": u"Tomat",
-        "avocado": u"Avokado",
-        "pear": u"Päron"
-    }
-
     def __init__(self, graph_file, label_file, input_name, output_name, net="mobilenet"):
         self.graph = self.load_graph(graph_file)
         self.labels = self.load_labels(label_file)
@@ -59,7 +46,7 @@ class Classifier:
         top_k = results.argsort()[-5:][::-1]
         res_list = []
         for i in top_k:
-            res_list.append({"object": self.translations[self.labels[i]], "accuracy":str(results[i])})
+            res_list.append({"object": self.labels[i], "accuracy":str(results[i])})
         return res_list
 
 
