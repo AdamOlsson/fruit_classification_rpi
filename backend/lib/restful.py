@@ -5,7 +5,8 @@ class Restful:
     @staticmethod
     def post(url, data):
         try:
-            response = requests.post(url, json=data)
+            results = {"results": data}
+            response = requests.post(url, json=results)
             print type(response.status_code)
             if response.status_code != 200:
                 print response.content
