@@ -1,7 +1,7 @@
 potato
 kiwi
 avocado
-bell pepper
+bellpepper
 tomato
 pear
 clementine

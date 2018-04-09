@@ -2,7 +2,7 @@ apple
 kiwi
 potato
 banana
-bell pepper
+bellpepper
 avocado
 tomato
 pear
