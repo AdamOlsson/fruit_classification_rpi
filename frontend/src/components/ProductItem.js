@@ -23,7 +23,7 @@ class ProductItem extends React.Component {
                 <div style={{ display: 'inline-block' }}
                     className="product-item"
                     onClick={this.printLabel}>
-                    <img src = {this.props.image} style ={{ opacity: 0.9 }} alt =""/>
+                    <img src = {this.props.image} style ={{ opacity: '0.9', width: '80%' }} alt =""/>
                     <div style={{ display: 'inline-block' }}>
                         {this.props.name + ' '}
                         {this.props.price}

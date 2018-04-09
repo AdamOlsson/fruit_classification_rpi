@@ -10,7 +10,7 @@
 }
 
 .App span{
-  font-size: 48px;
+  font-size: 28px;
   color: rgb(0,0,0,0.5);
 }
 
@@ -36,7 +36,7 @@
 
 .panel{
   width: 80%;
-  max-height: 50px;
+  max-height: 30px;
   margin: 20px;
   padding: 20px;
   border-radius: 36px;
@@ -59,7 +59,7 @@
 
 .text-input{
   border-radius: 36px;
-  font-size: 36px;
+  font-size: 24px;
   outline: none;
   margin: 0.1em;
   padding-left: 0.5em;
@@ -80,6 +80,8 @@
 }
 
 .product-item{
+  width: 190px;
+  height: 190px;
   font-size: 14px;
   background-color: rgba(255,255,255,1);
   border: 2px;

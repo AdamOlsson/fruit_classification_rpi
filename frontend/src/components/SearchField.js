@@ -34,7 +34,6 @@ class SearchField extends React.Component {
                 <ProductItem name="Paprika" image={bellpepper} price = "60 kr/kg" />,
                 <ProductItem name="Äpple" image={apple} price = "60 kr/kg" />
 
-
             ]
         };
         this.handleChange = this.handleChange.bind(this);
