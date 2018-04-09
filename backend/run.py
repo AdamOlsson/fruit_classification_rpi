@@ -10,8 +10,8 @@ from lib.restful import Restful
 
 if __name__ == "__main__":
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    model_file = dir_path + "/saved_models/mobilenet/v1/mobilenet_output_graph.pb"
-    label_file = dir_path + "/saved_models/mobilenet/v1/mobilenet_output_labels.txt"
+    model_file = dir_path + "/saved_models/mobilenet/v3/mobilenet_output_graph.pb"
+    label_file = dir_path + "/saved_models/mobilenet/v3/mobilenet_output_labels.txt"
     input_layer = "input"
     output_layer = "final_result"
     input_name = "import/" + input_layer
@@ -26,6 +26,7 @@ if __name__ == "__main__":
             try:
                 while(True):
                     camera.resolution = (640, 480)
+                    camera.rotation = 270
                     #TODO MAKE BUTTON HERE
                     print "Press 'Enter' to capture an image."
                     dummy = raw_input()
