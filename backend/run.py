@@ -49,8 +49,14 @@ if __name__ == "__main__":
                     if post_success:
                         print "Successful POST"
                     else:
-                        print "Failed POST"
+                        print "Failed POST, retrying in 1 second."
+                        time.sleep(1)
 
+                        post_success = Restful.post("http://127.0.0.1:4001/results", results)
+                        if post_success:
+                            print "Successful POST"
+                        else: 
+                            print "Failed POST. Can't POST to results."
             except KeyboardInterrupt:
                 print "Exiting..."
                 c.stop()
