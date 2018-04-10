@@ -19,7 +19,6 @@ class App extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            weightRecognized: false,
             bestResults: '',
             isFull: false,
             response: false,
@@ -33,7 +32,6 @@ class App extends Component {
         const { endpoint } = this.state;
         const socket = socketIOClient(endpoint);
         socket.on("FromAPI", data => { // VIKTIGT ATT DET STÅR "FromAPI"
-            this.sendProperties(data);
             this.setState({ response: true });
         });
     }
@@ -42,25 +40,8 @@ class App extends Component {
         this.setState({ isFull: true });
     }
 
-    sendProperties (data) {
-        var tempArray = [];
-
-        data.results.map(function (prod) {
-            if (prod.accuracy >= 0.1) {
-                tempArray.push(prod.object);
-            }
-        });
-        this.setState({ bestResults: tempArray });
-
-    }
-
-
-    redirectToIdentification () {
-        history.push('/identification');
-        setTimeout(function () {
-            history.push('/IdentificationResults');
-        }, 2000);
-        return null;
+    redirectToIdentificationTest(){
+      history.push('/identification');
     }
 
     redirectToHome () {
@@ -72,16 +53,8 @@ class App extends Component {
         const { response } = this.state;
 
         if (response === true) {
-            this.redirectToIdentification();
+          history.push('/identification');
         }
-
-
-        if (this.state.weightRecognized === true) {
-            history.push('/identification');
-            return null;
-        }
-
-        if (this.state.weightRecognized === false) {
             return (
                 <div>
                     <button onClick={this.goFull}>
@@ -94,7 +67,7 @@ class App extends Component {
                         <div className="full-screenable-node">
                             <KeyHandler
                                 keyEventName={KEYPRESS}
-                                keyValue="s"
+                                keyValue="z"
                                 onKeyHandle={this.redirectToIdentification} />
 
                             <Router history={history}>
@@ -109,14 +82,12 @@ class App extends Component {
                                         component = {(props) =>
                                             <IdentificationResults results = {this.state.bestResults} />}
                                     />
-
                                 </div>
                             </Router>
                         </div>
                     </Fullscreen>
                 </div>
             );
-        }
     }
 }
 
