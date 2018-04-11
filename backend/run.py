@@ -36,7 +36,7 @@ if __name__ == "__main__":
                     camera.capture(output, 'rgb')
 
                     # Dummy post to tell frontend that labeling is starting
-                    Restful.post("http://127.0.0.1:4001/results", {}) 
+                    Restful.post("http://127.0.0.1:4001/results", []) 
 
                     print "Done! Labeling image..."
                     checkpoint = time.time()
