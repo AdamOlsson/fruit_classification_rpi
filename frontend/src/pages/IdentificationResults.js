@@ -76,7 +76,7 @@ class IdentificationResults extends React.Component {
                     <div className="panel" style={{ flex: 1 }} >
                         <span> Välj önskad vara </span>
                     </div>
-                    <div style={{ justifyContent: 'center', alignItems: 'center', maxHeight: '45%' }}>
+                    <div style={{ justifyContent: 'center', alignItems: 'center', maxHeight: '55%' }}>
                         <div>
                             {filteredProducts.map((product) => {
                                 return (<ProductItem
