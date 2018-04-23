@@ -11,7 +11,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             value: '',
-            showInformation: true
+            showInformation: false
           };
 
         this.showInformationPanel = this.showInformationPanel.bind(this);
