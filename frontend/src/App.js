@@ -7,8 +7,8 @@ import Fullscreen from "react-full-screen";
 import socketIOClient from "socket.io-client";
 import PropTypes from 'prop-types';
 
-
 import Home from "./pages/Home";
+import ScreenSaver from "./pages/ScreenSaver";
 import Identification from "./pages/Identification";
 import IdentificationResults from "./pages/IdentificationResults";
 
@@ -22,7 +22,7 @@ class App extends Component {
             bestResults: '',
             isFull: false,
             response: false,
-            endpoint: "http://127.0.0.1:4001" // Address to API
+            endpoint: "http://127.0.0.1:4001"
         };
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -31,7 +31,7 @@ class App extends Component {
     componentDidMount () {
         const { endpoint } = this.state;
         const socket = socketIOClient(endpoint);
-        socket.on("FromAPI", data => { // VIKTIGT ATT DET STÅR "FromAPI"
+        socket.on("FromAPI", data => {
             this.setState({ response: true });
         });
     }
@@ -40,7 +40,7 @@ class App extends Component {
         this.setState({ isFull: true });
     }
 
-    redirectToIdentificationTest(){
+    redirectToIdentification(){
       history.push('/identification');
     }
 
@@ -67,17 +67,18 @@ class App extends Component {
                         <div className="full-screenable-node">
                             <KeyHandler
                                 keyEventName={KEYPRESS}
-                                keyValue="z"
+                                keyValue="s"
                                 onKeyHandle={this.redirectToIdentification} />
 
                             <Router history={history}>
                                 <div>
-                                    <Route exact path="/" component = {Home} />
+                                    <Route exact path="/" component = {ScreenSaver} />
                                     <Route path="/identification"
                                         component = {Identification}
                                     />
                                     <Route path="/home" component = {Home} />
                                     <Route path="/printing" component = {Printing} />
+                                    <Route path="/screensaver" component = {ScreenSaver} />
                                     <Route path="/identificationResults"
                                         component = {(props) =>
                                             <IdentificationResults results = {this.state.bestResults} />}

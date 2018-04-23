@@ -52,7 +52,7 @@ class SearchField extends React.Component {
 
         let filteredProducts = this.state.products.filter(
             (product) => {
-                return product.props.name.toLowerCase().indexOf(
+                return product.props.label.toLowerCase().indexOf(
                     this.state.value.toLowerCase()) !== -1;
             }
         );

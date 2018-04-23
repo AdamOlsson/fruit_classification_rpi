@@ -8,7 +8,7 @@ class Printing extends React.Component {
         return (
             <div className="App" style={{ display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center' }} >
                 <div className="panel" style={{ flex: 3 }} >
-                    <span> Lägg varan på vågen</span>
+                    <span> Skriver ut etikett </span>
                 </div>
                 <span style={{ color: 'Gainsboro', margin: '30px' }} > Ta din etikett</span>
 

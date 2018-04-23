@@ -74,7 +74,7 @@ class IdentificationResults extends React.Component {
                     flex: 1,
                     alignItems: 'center' }} >
                     <div className="panel" style={{ flex: 1 }} >
-                        <span> Välj önskad vara </span>
+                        <span> Klicka på önskad vara</span>
                     </div>
                     <div style={{ justifyContent: 'center', alignItems: 'center', maxHeight: '55%' }}>
                         <div>
