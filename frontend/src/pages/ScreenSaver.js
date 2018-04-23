@@ -20,10 +20,10 @@ class ScreenSaver extends React.Component {
 
         return (
           <div onClick = {this.redirectToHome} className="screen-saver" style={{ display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center' }} >
-              <img style={{width: '80%' }} src={require("../Images/explanation.png")} />
+              <img style={{width: '80%', marginTop: '20px' }} src={require("../Images/explanation.png")} />
               <div style={{color: 'DimGray', marginTop: '20px'}}>
               <HandClick size='56px' /></div>
-              <div style ={{marginTop: '20px'}}> Tryck på skärmen </div>
+              <div style ={{marginTop: '15px'}}> Tryck på skärmen </div>
           </div>
         );
     }
