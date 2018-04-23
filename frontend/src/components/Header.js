@@ -1,10 +1,7 @@
 import React from 'react';
 import '../App.css';
-import FaIconPack from 'react-icons/lib/fa'
 import ClockIcon from 'react-icons/lib/fa/clock-o';
-import QuestionIcon from 'react-icons/lib/fa/question-circle';
 import moment from 'moment';
-import history from '../history.js'
 
 
 class Header extends React.Component {

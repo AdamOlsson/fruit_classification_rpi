@@ -11,7 +11,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             value: '',
-            showInformation: false
+            showInformation: true
           };
 
         this.showInformationPanel = this.showInformationPanel.bind(this);
@@ -39,20 +39,19 @@ class Home extends React.Component {
         return (
             <div className="App" style={{ display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center' }} >
                 <Header label = "Lägg varan på vågen" />
-                <div style={{float:'left'}}>
-                Denna ska till vänster
-              </div>
-                <div style={{ flex: 1 }}>
-                  <span onClick = {this.showInformationPanel} style={{ color: 'white', float: 'left', marginRight: '10px' }}>
-                    <QuestionIcon size= "60px" style = {{ marginLeft: '20px'}}/>
-                  </span>
-                <div>
-                    {this.state.showInformation &&
-                      <div onClick = {this.hideInformationPanel}>
-                        <img className="information-panel" src={require("../Images/explanation.png")} />
-                      </div>
-                    }
+                <div className="question-button" >
+                    <span onClick = {this.showInformationPanel} style={{ color: 'white', float: 'left', marginRight: '10px' }}>
+                      <QuestionIcon size= "60px" style = {{ marginLeft: '20px'}}/>
+                    </span>
+                  <div>
+                      {this.state.showInformation &&
+                        <div onClick = {this.hideInformationPanel}>
+                          <img className="information-panel" src={require("../Images/explanation.png")} alt = "" />
+                        </div>
+                      }
+                  </div>
                 </div>
+                <div style={{ flex: 1, marginTop: '-5%' }}>
                     <SearchField />
                 </div>
             </div>
