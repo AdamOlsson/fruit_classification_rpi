@@ -18,6 +18,16 @@
   text-align: center;
 }
 
+.information-panel{
+  width: 80%;
+  margin-top: 20px;
+  z-index: 10000;
+  position: absolute;
+  margin-left: -40%;
+  border-radius: 30px;
+  box-shadow: 10px 10px 47px 300px rgba(102,102,102,0.8);
+
+}
 
 /*
   HIDE CURSOR BEFORE LAUNCH

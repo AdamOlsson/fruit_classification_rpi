@@ -8,7 +8,6 @@ import socketIOClient from "socket.io-client";
 import PropTypes from 'prop-types';
 
 import Home from "./pages/Home";
-import ScreenSaver from "./pages/ScreenSaver";
 import Identification from "./pages/Identification";
 import IdentificationResults from "./pages/IdentificationResults";
 
@@ -72,13 +71,12 @@ class App extends Component {
 
                             <Router history={history}>
                                 <div>
-                                    <Route exact path="/" component = {ScreenSaver} />
+                                    <Route exact path="/" component = {Home} />
                                     <Route path="/identification"
                                         component = {Identification}
                                     />
                                     <Route path="/home" component = {Home} />
                                     <Route path="/printing" component = {Printing} />
-                                    <Route path="/screensaver" component = {ScreenSaver} />
                                     <Route path="/identificationResults"
                                         component = {(props) =>
                                             <IdentificationResults results = {this.state.bestResults} />}
