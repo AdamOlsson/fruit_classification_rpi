@@ -7,7 +7,6 @@ import Fullscreen from "react-full-screen";
 import socketIOClient from "socket.io-client";
 import PropTypes from 'prop-types';
 
-
 import Home from "./pages/Home";
 import Identification from "./pages/Identification";
 import IdentificationResults from "./pages/IdentificationResults";
@@ -19,11 +18,10 @@ class App extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            weightRecognized: false,
             bestResults: '',
             isFull: false,
             response: false,
-            endpoint: "http://127.0.0.1:4001" // Address to API
+            endpoint: "http://127.0.0.1:4001"
         };
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -32,42 +30,17 @@ class App extends Component {
     componentDidMount () {
         const { endpoint } = this.state;
         const socket = socketIOClient(endpoint);
-        socket.on("FromAPI", data => { // VIKTIGT ATT DET STÅR "FromAPI"
-            this.sendProperties(data);
+        socket.on("FromAPI", data => {
             this.setState({ response: true });
         });
     }
-
-
-    /*loadData () {
-        this.setState({ outputChange: data.output });
-        return data.output;
-    }*/
 
     goFull = () => {
         this.setState({ isFull: true });
     }
 
-    sendProperties (data) {
-        var tempArray = [];
-
-        this.setState({ passedData: data.results[0].object });
-        data.results.map(function (prod) {
-            if (prod.accuracy >= 0.1) {
-                tempArray.push(prod.object);
-            }
-        });
-        this.setState({ bestResults: tempArray });
-        console.log(this.state.bestResults);
-    }
-
-
-    redirectToIdentification () {
-        history.push('/identification');
-        setTimeout(function () {
-            history.push('/IdentificationResults');
-        }, 2000);
-        return null;
+    redirectToIdentification(){
+      history.push('/identification');
     }
 
     redirectToHome () {
@@ -79,16 +52,8 @@ class App extends Component {
         const { response } = this.state;
 
         if (response === true) {
-            this.redirectToIdentification();
+          history.push('/identification');
         }
-
-
-        if (this.state.weightRecognized === true) {
-            history.push('/identification');
-            return null;
-        }
-
-        if (this.state.weightRecognized === false) {
             return (
                 <div>
                     <button onClick={this.goFull}>
@@ -109,7 +74,6 @@ class App extends Component {
                                     <Route exact path="/" component = {Home} />
                                     <Route path="/identification"
                                         component = {Identification}
-                                        state = {this.passedData}
                                     />
                                     <Route path="/home" component = {Home} />
                                     <Route path="/printing" component = {Printing} />
@@ -117,14 +81,12 @@ class App extends Component {
                                         component = {(props) =>
                                             <IdentificationResults results = {this.state.bestResults} />}
                                     />
-
                                 </div>
                             </Router>
                         </div>
                     </Fullscreen>
                 </div>
             );
-        }
     }
 }
 

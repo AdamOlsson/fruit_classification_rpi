@@ -4,7 +4,7 @@ kiwi
 potato
 orange
 banana
-bell pepper
+bellpepper
 clementine
 pear
 avocado

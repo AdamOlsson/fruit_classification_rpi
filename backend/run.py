@@ -10,8 +10,8 @@ from lib.restful import Restful
 
 if __name__ == "__main__":
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    model_file = dir_path + "/saved_models/mobilenet/v1/mobilenet_output_graph.pb"
-    label_file = dir_path + "/saved_models/mobilenet/v1/mobilenet_output_labels.txt"
+    model_file = dir_path + "/saved_models/mobilenet/v3/mobilenet_output_graph.pb"
+    label_file = dir_path + "/saved_models/mobilenet/v3/mobilenet_output_labels.txt"
     input_layer = "input"
     output_layer = "final_result"
     input_name = "import/" + input_layer
@@ -26,6 +26,7 @@ if __name__ == "__main__":
             try:
                 while(True):
                     camera.resolution = (640, 480)
+                    camera.rotation = 270
                     #TODO MAKE BUTTON HERE
                     print "Press 'Enter' to capture an image."
                     dummy = raw_input()
@@ -33,6 +34,10 @@ if __name__ == "__main__":
                     print "Capturing..."
                     start = time.time()
                     camera.capture(output, 'rgb')
+
+                    # Dummy post to tell frontend that labeling is starting
+                    Restful.post("http://127.0.0.1:4001/results", []) 
+
                     print "Done! Labeling image..."
                     checkpoint = time.time()
                     results = c.label_image(output.array)
@@ -44,13 +49,20 @@ if __name__ == "__main__":
                         print res
                     print "{Capture", checkpoint-start, "seconds:::Labeling", end-checkpoint,"seconds}"
 
+                    # Post result du frontend
                     post_success = Restful.post("http://127.0.0.1:4001/results", results)
 
                     if post_success:
                         print "Successful POST"
                     else:
-                        print "Failed POST"
+                        print "Failed POST, retrying in 1 second."
+                        time.sleep(1)
 
+                        post_success = Restful.post("http://127.0.0.1:4001/results", results)
+                        if post_success:
+                            print "Successful POST"
+                        else: 
+                            print "Failed POST. Can't POST to results."
             except KeyboardInterrupt:
                 print "Exiting..."
                 c.stop()
