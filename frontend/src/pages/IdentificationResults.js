@@ -5,6 +5,7 @@ import ProductItem from '../components/ProductItem';
 import SearchField from '../components/SearchField';
 import history from '../history';
 import Strings from '../Strings.json';
+import Header from '../components/Header';
 
 import potato from '../Images/potato.jpg';
 import banana from '../Images/banana.jpg';
@@ -50,17 +51,15 @@ class IdentificationResults extends React.Component {
             return this.props.results.includes(product.props.name);
         });
 
-
         if (filteredProducts.length === 0) {
             return (
+
                 <div className="App" style={{
                     display: 'flex',
                     flexDirection: 'column',
                     flex: 1,
                     alignItems: 'center' }} >
-                    <div className="panel" style={{ flex: 1 }} >
-                        <span> Produkten hittades inte. Vänligen sök. </span>
-                    </div>
+                    <Header label="Produkten hittades inte. Vänligen sök."/>
                     <div style={{ flex: 1 }}>
                         <SearchField />
                     </div>
@@ -73,9 +72,7 @@ class IdentificationResults extends React.Component {
                     flexDirection: 'column',
                     flex: 1,
                     alignItems: 'center' }} >
-                    <div className="panel" style={{ flex: 1 }} >
-                        <span> Klicka på önskad vara</span>
-                    </div>
+                      <Header label="Klicka på önskad vara" />
                     <div style={{ justifyContent: 'center', alignItems: 'center', maxHeight: '55%' }}>
                         <div>
                             {filteredProducts.map((product) => {

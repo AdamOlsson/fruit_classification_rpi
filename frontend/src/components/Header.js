@@ -3,7 +3,6 @@ import '../App.css';
 import ClockIcon from 'react-icons/lib/fa/clock-o';
 import moment from 'moment';
 
-
 class Header extends React.Component {
 
     render () {
