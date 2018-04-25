@@ -6,6 +6,8 @@ import numpy as np
 import time
 from lib.classifier import Classifier
 from lib.restful import Restful
+from lib.hx711 import HX711
+from RPi.GPIO import cleanup
 
 
 if __name__ == "__main__":
@@ -17,6 +19,12 @@ if __name__ == "__main__":
     input_name = "import/" + input_layer
     output_name = "import/" + output_layer
 
+    hx = HX711(5,6)
+    
+    hx.reset()
+    hx.tare()
+
+
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as output:
             c = Classifier(model_file, label_file, input_name, output_name, net="mobilenet")
@@ -27,10 +35,17 @@ if __name__ == "__main__":
                 while(True):
                     camera.resolution = (640, 480)
                     camera.rotation = 270
-                    #TODO MAKE BUTTON HERE
-                    print "Press 'Enter' to capture an image."
-                    dummy = raw_input()
-
+                    if False:
+                        print "Press 'Enter' to capture an image."
+                        dummy = raw_input()
+                    else:
+                        val = hx.get_weight(5)
+                        print val
+                        hx.power_down() # recommended if idle to long
+                        hx.power_up()
+                        if val > -200:
+                            time.sleep(.5)
+                            continue # If nothing placed on scale, wait 05 sec and check again
                     print "Capturing..."
                     start = time.time()
                     camera.capture(output, 'rgb')
@@ -66,3 +81,5 @@ if __name__ == "__main__":
             except KeyboardInterrupt:
                 print "Exiting..."
                 c.stop()
+                cleanup()
+                
