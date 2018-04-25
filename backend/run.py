@@ -20,7 +20,7 @@ if __name__ == "__main__":
     output_name = "import/" + output_layer
 
     hx = HX711(5,6)
-    
+    hx.set_reference_unit(-400)
     hx.reset()
     hx.tare()
 
@@ -43,9 +43,9 @@ if __name__ == "__main__":
                         print val
                         hx.power_down() # recommended if idle to long
                         hx.power_up()
-                        if val > -200:
+                        if val < 200: # If value less than 200g do nothing
                             time.sleep(.5)
-                            continue # If nothing placed on scale, wait 05 sec and check again
+                            continue 
                     print "Capturing..."
                     start = time.time()
                     camera.capture(output, 'rgb')
