@@ -35,7 +35,7 @@ if __name__ == "__main__":
                 while(True):
                     camera.resolution = (640, 480)
                     camera.rotation = 270
-                    if False:
+                    if True:
                         print "Press 'Enter' to capture an image."
                         dummy = raw_input()
                     else:
