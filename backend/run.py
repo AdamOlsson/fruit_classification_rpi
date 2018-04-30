@@ -29,7 +29,7 @@ if __name__ == "__main__":
         with picamera.array.PiRGBArray(camera) as output:
             c = Classifier(model_file, label_file, input_name, output_name, net="mobilenet")
             c.start()
-
+            old_val = 0 # save old load cell val
             time.sleep(.1)
             try:
                 while(True):
@@ -40,12 +40,14 @@ if __name__ == "__main__":
                         dummy = raw_input()
                     else:
                         val = hx.get_weight(5)
+                        
                         print val
                         hx.power_down() # recommended if idle to long
                         hx.power_up()
-                        if val < 200: # If value less than 200g do nothing
+                        if val < 50 and abs(val - old_val) > 10 : # If value less than 200g do nothing
                             time.sleep(.5)
                             continue 
+                        old_val = val
                     print "Capturing..."
                     start = time.time()
                     camera.capture(output, 'rgb')
