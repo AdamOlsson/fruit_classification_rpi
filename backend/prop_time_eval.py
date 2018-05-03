@@ -80,6 +80,7 @@ if __name__ == "__main__":
                     prop_time = cp_two - cp_one
                     mem_session = process.memory_info()[0]
                     print 'Propagation time was {} seconds'.format(prop_time)
+                    print 'TF Session is {}'.format(sys.getsizeof(net.session))
                     print 'Size of this session is {} bytes'.format(mem_session)
                     #print 'TF Session is {} bytes'.format(sys.getsizeof(net.session))
                     print "Writing to file..."
