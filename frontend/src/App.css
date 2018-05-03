@@ -7,6 +7,11 @@
   background-image: url("https://images.pexels.com/photos/952353/pexels-photo-952353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-size: 100%;
   overflow-x: hidden;
+  overflow-y: hidden;
+  cursor: none;
+}
+
+{cursor: none;
 }
 
 .screen-saver{
@@ -34,9 +39,7 @@
   width: 100%;
 }
 
-/*
-  HIDE CURSOR BEFORE LAUNCH
-* {cursor: none;} */
+
 
 .App span{
   font-size: 32px;
