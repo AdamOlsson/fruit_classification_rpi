@@ -5,7 +5,8 @@
   height: 100%;
   position: absolute;
   background-image: url("https://images.pexels.com/photos/952353/pexels-photo-952353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-  background-size: 100%
+  background-size: 100%;
+  overflow-x: hidden;
 }
 
 .screen-saver{
@@ -19,8 +20,9 @@
 }
 
 .information-panel{
-  width: 80%;
-  margin-top: 20px;
+  width: 90%;
+  margin-top: -20px;
+  margin-left: -50px;
   z-index: 10000;
   position: absolute;
   border-radius: 30px;

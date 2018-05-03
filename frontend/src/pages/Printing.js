@@ -1,6 +1,8 @@
 import React from 'react';
 import '../App.css';
 import Loading from '../components/Loading';
+import Info from 'react-icons/lib/fa/info-circle';
+
 
 
 class Printing extends React.Component {
@@ -8,9 +10,14 @@ class Printing extends React.Component {
         return (
             <div className="App" style={{ display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center' }} >
                 <div className="panel" style={{ flex: 3 }} >
-                    <span> Skriver ut etikett </span>
+                    <span> Skriver ut etikett . . . </span>
                 </div>
-                <span style={{ color: 'Gainsboro', margin: '30px' }} > Ta din etikett</span>
+                <div style={{display: 'inline-block', color: 'white'}}>
+                  <Info size= "60px" style={{marginTop: '-10px' }}/>
+                  <div style={{padding: '20px', display: 'inline-block'}}>
+                  <span style={{ color: 'Gainsboro', paddingTop: '80px' }} > Ta din etikett</span>
+                  </div>
+              </div>
 
                 <div style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Loading />

@@ -6,6 +6,8 @@ import SearchField from '../components/SearchField';
 import history from '../history';
 import Strings from '../Strings.json';
 import Header from '../components/Header';
+import HandPointer from 'react-icons/lib/fa/hand-o-up';
+
 
 import potato from '../Images/potato.jpg';
 import banana from '../Images/banana.jpg';
@@ -72,7 +74,7 @@ class IdentificationResults extends React.Component {
                     flexDirection: 'column',
                     flex: 1,
                     alignItems: 'center' }} >
-                      <Header label="Klicka på önskad vara" />
+                      <Header label="Vara identifierad!" icon = "Checkbox"/>
                     <div style={{ justifyContent: 'center', alignItems: 'center', maxHeight: '55%' }}>
                         <div>
                             {filteredProducts.map((product) => {
@@ -82,6 +84,7 @@ class IdentificationResults extends React.Component {
                                     image = {product.props.image} />);
                             })}
                         </div>
+
                     </div>
 
                     <div>
@@ -89,13 +92,15 @@ class IdentificationResults extends React.Component {
                     <span> Tyvärr kunde systemet inte identifiera varan. Vänligen sök.</span>}
                     </div>
 
-                    <div style={{ flex: 1, flexDirection: 'row' }} className = "info-text" >
-                        <div>Hittades inte din vara?</div>
-                        <div><button className="link-button" onClick={this.redirectToHome}>
+                    <div style={{ flex: 1, flexDirection: 'row', marginTop: '-10px' }} className = "info-text" >
+                        <div>Klicka på önskad vara
+                        <HandPointer size ='40px' style={{marginLeft: '20px'}}/>
+                        </div>
+                        <div>
+                          <button className="link-button" onClick={this.redirectToHome}>
                           Sök vara
                         </button>
                         </div>
-
                     </div>
                 </div>
             );
